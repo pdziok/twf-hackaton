@@ -29,6 +29,7 @@ class Application extends \Silex\Application
 
         $this->register(new ServiceControllerServiceProvider());
         $this->register(new ControllersServiceProvider());
+        $this->register(new \Silex\Provider\UrlGeneratorServiceProvider());
         $this->register(new TwigServiceProvider(), array(
             'twig.path' => ROOT_PATH .'/views',
         ));

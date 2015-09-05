@@ -28,20 +28,24 @@ class GameController
     {
         $amount = $request->get('number', 3);
         $cards = $this->getRandomCards($amount);
+        $chosen = [];
+        foreach ($cards as $card) {
+            $chosen[] = $card['id'];
+        }
 
         return $app['twig']->render('game/start.twig', array_merge([
-            'cards' => $cards
+            'cards' => $cards,
+            'chosen' => $chosen
         ], $request->query->all()));
     }
 
     public function getPlayAction(Request $request, SilexApplication $app)
     {
-        $amount = $request->get('amount', 20);
         $chosenIds = $request->get('chosen');
 
-        $allCardsNumber = 20;
-        $cardTypesNumber = 6;
-        $chosenIds = [1, 2, 3];
+        $allCardsNumber = $request->get('total', 20);
+        $cardTypesNumber = $request->get('unique', 6);
+//        $chosenIds = $request->get('chosenIds');
 
         $cardIds = $this->getCardIdsToPlay($allCardsNumber, $cardTypesNumber, $chosenIds);
         $cards = $this->getCards($cardIds, $chosenIds);
