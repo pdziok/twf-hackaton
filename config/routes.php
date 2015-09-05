@@ -15,5 +15,19 @@ return [
                 'get'
             ],
         ],
+        [
+            'pattern' => '/game',
+            'controller' => 'game.controller:getMainAction',
+            'method' => [
+                'get'
+            ],
+        ],
+        [
+            'pattern' => '/summary',
+            'controller' => 'game.controller:getSummaryAction',
+            'method' => [
+                'get'
+            ],
+        ],
     ],
 ];
