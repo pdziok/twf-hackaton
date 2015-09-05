@@ -22,6 +22,14 @@ class GameController
         ['id' => 10, 'href' => 'cards/10.jpg'],
         ['id' => 11, 'href' => 'cards/11.jpg'],
         ['id' => 12, 'href' => 'cards/12.jpg'],
+        ['id' => 13, 'href' => 'cards/13.jpg'],
+        ['id' => 14, 'href' => 'cards/14.jpg'],
+        ['id' => 15, 'href' => 'cards/15.jpg'],
+        ['id' => 16, 'href' => 'cards/16.png'],
+        ['id' => 17, 'href' => 'cards/17.jpg'],
+        ['id' => 18, 'href' => 'cards/18.png'],
+        ['id' => 19, 'href' => 'cards/19.jpg'],
+        ['id' => 20, 'href' => 'cards/20.jpg'],
     ];
 
     public function getStartAction(Request $request, SilexApplication $app)
