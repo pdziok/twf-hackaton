@@ -91,7 +91,7 @@ $(function () {
         }
 
         function setGuessed() {
-            $card.attr('data-is-guessed', 'is-guessed');
+            $card.attr('data-is-guessed', '1');
             $card.find('.front').fadeTo("slow", 0.1);
 
             if (checkIsFinished()) {
