@@ -13,7 +13,10 @@
             {% endfor %}
         </div>
         <div class="grid-block">
-            <div class="grid-content start-button">
+            <div class="grid-content">
+                <a href="{{ app.request.baseUrl ~ '/game?number=' ~ number ~ '&total=' ~ total ~ '&unique=' ~ unique }}">
+                    <img height="200" width="200" src="./img/start.png">
+                </a>
             </div>
         </div>
     </div>

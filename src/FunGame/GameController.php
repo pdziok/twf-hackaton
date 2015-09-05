@@ -26,12 +26,12 @@ class GameController
 
     public function getStartAction(Request $request, SilexApplication $app)
     {
-        $amount = $request->get('amount', 3);
+        $amount = $request->get('number', 3);
         $cards = $this->getRandomCards($amount);
 
-        return $app['twig']->render('game/start.twig', [
+        return $app['twig']->render('game/start.twig', array_merge([
             'cards' => $cards
-        ]);
+        ], $request->query->all()));
     }
 
     public function getPlayAction(Request $request, SilexApplication $app)
