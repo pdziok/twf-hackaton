@@ -3,4 +3,11 @@
     background-size: contain;
     background: no-repeat center;
     margin: 4px;
+    padding: 0;
 }
+
+.small-vertical-offset-1 {
+    margin-top: 8.33333%; }
+
+.small-vertical-post-offset-1 {
+    margin-bottom: 8.33333%; }
