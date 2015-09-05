@@ -51,9 +51,17 @@ class GameController
         ]);
     }
 
-    public function getSummaryAction(SilexApplication $app)
+    public function getSummaryAction(Request $request, SilexApplication $app)
     {
-        return $app['twig']->render('game/summary.twig');
+        $gameTime = $request->get('gameTime');
+        $tries = $request->get('tries');
+        $isFinishEarlier = $request->get('isFinishEarlier');
+
+        return $app['twig']->render('game/summary.twig', [
+            'cards' => $gameTime,
+            'tries' => $tries,
+            'isFinishEarlier' => $isFinishEarlier,
+        ]);
     }
 
     private function getCards(array $cardIds, array $chosenIds)
