@@ -2,13 +2,40 @@
 
 {% block title %}Gra{% endblock %}
 {% block content %}
-    <div class="grid-block small-up-3">
-        <div class="grid-block"><img src="./img/star.png" /></div>
-        <div class="grid-block"><img src="./img/star.png" /></div>
-        <div class="grid-block"><img src="./img/star.png" /></div>
-        <div class="grid-block"><img src="./img/star.png" /></div>
-        <div class="grid-block"><img src="./img/star.png" /></div>
-        <div class="grid-block"><img src="./img/star.png" /></div>
+    <div class="grid-block small-up-5">
+
+        <div class="game-card-container">
+            <div id="game-card1" class="game-card" data-is-ok="1">
+                <div class="front">
+                    <img src="./img/star.png"/>
+                </div>
+                <div class="back">
+                    <img src="./img/ok.jpg"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-card-container">
+            <div id="game-card2" class="game-card" data-is-ok="0">
+                <div class="front">
+                    <img src="./img/star_blue.png"/>
+                </div>
+                <div class="back">
+                    <img src="./img/ok.jpg"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-card-container">
+            <div id="game-card3" class="game-card" data-is-ok="0">
+                <div class="front">
+                    <img src="./img/star_blue.png"/>
+                </div>
+                <div class="back">
+                    <img src="./img/ok.jpg"/>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
