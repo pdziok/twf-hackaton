@@ -1,4 +1,48 @@
-$(document).ready(function () {
+$(function () {
+
+    var startTime = new Date();
+    var tries = 0;
+    var isFinishEarlier = 0;
+
+    function increaseTry() {
+        tries++;
+    }
+
+    function checkIsFinished() {
+        return $('.game-card[data-is-guessed="0"][data-is-ok="1"]').length == 0;
+    }
+
+    function calculateGameTime(startTime) {
+        // later record end time
+        var endTime = new Date();
+
+        // time difference in ms
+        var timeDiff = endTime - startTime;
+
+        // strip the ms
+        timeDiff /= 1000;
+
+        // get seconds (Original had 'round' which incorrectly counts 0:28, 0:29, 1:30 ... 1:59, 1:0)
+        var seconds = Math.round(timeDiff % 60);
+
+        return seconds;
+    }
+
+    function finishGame(startTime) {
+        var gameTime = calculateGameTime(startTime);
+        redirectToSummary(gameTime);
+    }
+
+    function redirectToSummary(gameTime) {
+        var redirectUrl = '';
+        redirectUrl += window.location.protocol + '//' + window.location.hostname + '/summary';
+        redirectUrl += '?gameTime=' + gameTime;
+        redirectUrl += '?tries=' + tries;
+        redirectUrl += '?isFinishEarlier=' + isFinishEarlier;
+        window.location.href = redirectUrl;
+    }
+
+
     $(".game-card").flip({
         trigger: 'manual'
     });
@@ -12,16 +56,16 @@ $(document).ready(function () {
 
     $('.game-card-container').click(function () {
         var $card = $(this).find('.game-card');
-        var $state = $card.data('state');
+        var $isGuessed = $card.data('is-guessed');
         var $isOk = parseInt($card.data('is-ok'));
         var $imgOk = './img/ok.jpg';
         var $imgWrong = './img/wrong.jpg';
 
-        if (!isProcessed()) {
+        increaseTry();
+        if (!isGuessed()) {
             if ($isOk) {
                 flipOk();
             } else {
-                console.log('wrong');
                 flipWrong();
             }
         }
@@ -31,7 +75,7 @@ $(document).ready(function () {
             $card.flip(true, function () {
                 setTimeout(function () {
                     $card.flip(false, function () {
-                        setProcessed();
+                        setGuessed();
                     });
                 }, 1000);
             });
@@ -46,13 +90,17 @@ $(document).ready(function () {
             });
         }
 
-        function setProcessed() {
-            $card.attr('data-state', 'processed');
+        function setGuessed() {
+            $card.attr('data-is-guessed', 'is-guessed');
             $card.find('.front').fadeTo("slow", 0.1);
+
+            if (checkIsFinished()) {
+                finishGame(startTime);
+            }
         }
 
-        function isProcessed() {
-            return $state == 'processed';
+        function isGuessed() {
+            return $isGuessed == 'is-guessed';
         }
 
         function setBackImage($img) {
