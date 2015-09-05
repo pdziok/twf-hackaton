@@ -8,5 +8,12 @@ return [
                 'get'
             ],
         ],
+        [
+            'pattern' => '/start',
+            'controller' => 'game.controller:getStartAction',
+            'method' => [
+                'get'
+            ],
+        ],
     ],
 ];

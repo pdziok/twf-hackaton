@@ -4,6 +4,7 @@
  */
 namespace ServiceProvider;
 
+use FunGame\GameController;
 use Silex\Application as SilexApplication;
 use Silex\ServiceProviderInterface;
 use FunGame\IndexController;
@@ -23,6 +24,7 @@ class ControllersServiceProvider implements ServiceProviderInterface
     public function register(SilexApplication $app)
     {
         $this->registerIndexController($app);
+        $this->registerGameController($app);
     }
 
     /**
@@ -49,5 +51,19 @@ class ControllersServiceProvider implements ServiceProviderInterface
             return new IndexController();
         });
         $this->controllers[$serviceName] = IndexController::class;
+    }
+
+
+    /**
+     * @param SilexApplication $app
+     * @return array
+     */
+    private function registerGameController(SilexApplication $app)
+    {
+        $serviceName = 'game.controller';
+        $app[$serviceName] = $app->share(function () {
+            return new GameController();
+        });
+        $this->controllers[$serviceName] = GameController::class;
     }
 }
