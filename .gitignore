@@ -1,0 +1,7 @@
+vendor/
+node_modules/
+data/log/*
+!data/log/.gitkeep
+data/cache/*
+!data/cache/.gitkeep
+data/build/*
