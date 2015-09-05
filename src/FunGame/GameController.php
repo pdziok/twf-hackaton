@@ -71,7 +71,7 @@ class GameController
             foreach ($cardIds as $cardId) {
                 if ($image['id'] == $cardId) {
 
-                    if(in_array($image['id'], $chosenIds)){
+                    if (in_array($image['id'], $chosenIds)) {
                         $image['chosen'] = 1;
                     } else {
                         $image['chosen'] = 0;
@@ -106,7 +106,7 @@ class GameController
     }
 
     /**
-     * @param integer $allCardsNumber  liczba kart na planszy
+     * @param integer $allCardsNumber liczba kart na planszy
      * @param integer $cardTypesNumber liczba typow kart
      * @param array $chosenCards wybrane id kart
      * @return array
@@ -121,19 +121,32 @@ class GameController
             $toGuessCardIds = array_merge($chosenCards, $toGuessCardIds);
         }
 
-        //cards other than to guess
-        $otherCardIds = array_diff($this->extractCardIds($this->imageList), $chosenCards);
-        $otherCardIds = array_slice($otherCardIds, 0, $cardTypesNumber - count($chosenCards));
+        if ($cardTypesNumber != count($chosenCards)) {
+            //cards other than to guess
+            $otherCardIds = array_diff($this->extractCardIds($this->imageList), $chosenCards);
+            $otherCardIds = array_rand(array_combine($otherCardIds, $otherCardIds),
+                $cardTypesNumber - count($chosenCards));
 
-        //wrong cards
-        $wrongCardIds = [];
-        for ($i = 0; $i < $oneCardNumber; $i++) {
-            $wrongCardIds = array_merge($otherCardIds, $wrongCardIds);
-        }
+            //wrong cards
+            $wrongCardIds = [];
+            for ($i = 0; $i < $oneCardNumber; $i++) {
+                $wrongCardIds = array_merge($otherCardIds, $wrongCardIds);
+            }
 
-        $cardsToAdd = $allCardsNumber - $oneCardNumber * count($chosenCards) - $oneCardNumber * count($otherCardIds);
-        for ($i = 0; $i < $cardsToAdd; $i++) {
-            $wrongCardIds[] = array_rand($otherCardIds, 1);
+            $cardsToAdd = $allCardsNumber - $oneCardNumber * count($chosenCards) - $oneCardNumber * count($otherCardIds);
+
+            for ($i = 0; $i < $cardsToAdd; $i++) {
+                $wrongCardIds[] = $otherCardIds[array_rand($otherCardIds, 1)];
+            }
+
+        } else {
+            $cardsToAdd = $allCardsNumber - $oneCardNumber * count($chosenCards);
+
+            $wrongCardIds = [];
+            for ($i = 0; $i < $cardsToAdd; $i++) {
+                $wrongCardIds[] = $toGuessCardIds[array_rand($toGuessCardIds, 1)];
+            }
+
         }
 
         $allCardIds = array_merge($toGuessCardIds, $wrongCardIds);
