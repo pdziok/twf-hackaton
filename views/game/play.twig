@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Gra{% endblock %}
+{% block content %}
+    <div class="grid-block vertical">
+
+        <div class="grid-block small-vertical-offset-1 {% if cards|length > 5 %}small-up-{{ (cards|length / 2)|round }}{% endif %}">
+
+            {% for i,card in cards %}
+            <div class="grid-block game-card-container">
+                <div id="game-card{{ i }}" class="grid-content game-card" data-is-ok="{{ card.chosen}}}">
+                    <div class="front card" style="background-image: url('{{ card.href }}'); background-size: contain;">
+                    </div>
+                    <div class="back card" style="background-image: url('./img/ok.jpg'); background-size: contain;">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="grid-block">
+            <div class="grid-content start-button">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
