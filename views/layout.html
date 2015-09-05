@@ -12,10 +12,17 @@
     <script src="./assets/js/vendor/fastclick.js"></script>
     <script src="./assets/js/app.js"></script>
     <link href="./assets/css/fungame.css" rel="stylesheet" type="text/css">
+      <link href="./assets/css/sequence-theme.mono.min.css" rel="stylesheet" media="all">
   </head>
   <body>
-    <div class="grid-frame vertical">
+  <div class="seq">
+    <div class="grid-frame vertical seq-canvas">
       {% block content %}{% endblock %}
     </div>
+  </div>
+    <script src="./assets/js/vendor/imagesloaded.pkgd.min.js"></script>
+    <script src="./assets/js/vendor/hammer.min.js"></script>
+    <script src="./assets/js/vendor/sequence.min.js"></script>
+    <script src="./assets/js/vendor/sequence-theme.mono.js"></script>
   </body>
 </html>

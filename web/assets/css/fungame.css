@@ -1,9 +1,9 @@
 .card {
-    border: 1px solid #335ebb;
     background-size: contain;
-    background: no-repeat center;
-    margin: 4px;
-    padding: 0;
+    background: no-repeat center #fff;
+    margin: 0.5em;
+    padding: 1.5em;
+    box-shadow: 0.1em 0.1em 0.5em #000;
 }
 
 .small-vertical-offset-1 {
@@ -15,4 +15,9 @@
 .start-button {
     background: url('/assets/img/start.png') no-repeat center;
     background-size: contain;
+}
+
+.seq-in .content {
+    transform: translateY(0);
+    transition: 2s;
 }
