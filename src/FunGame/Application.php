@@ -6,6 +6,7 @@ use MJanssen\Provider\RoutingServiceProvider;
 use ServiceProvider\ControllersServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
+use Silex\Provider\TwigServiceProvider;
 
 class Application extends \Silex\Application
 {
@@ -28,5 +29,8 @@ class Application extends \Silex\Application
 
         $this->register(new ServiceControllerServiceProvider());
         $this->register(new ControllersServiceProvider());
+        $this->register(new TwigServiceProvider(), array(
+            'twig.path' => ROOT_PATH .'/views',
+        ));
     }
 }

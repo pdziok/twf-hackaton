@@ -5,3 +5,8 @@ data/log/*
 data/cache/*
 !data/cache/.gitkeep
 data/build/*
+node_modules
+npm-debug.log
+bower_components
+build
+.sass-cache
