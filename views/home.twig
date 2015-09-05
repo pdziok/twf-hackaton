@@ -3,12 +3,14 @@
 {% block title %}Index{% endblock %}
 {% block content %}
 <div class="grid-content">
-    <div id="timer" style="position:absolute;right:20px;bottom:20px">
-        <img height="200" width="200" src="./img/start.png" />
+
+    <div style="position:absolute;right:20px;bottom:20px; z-index: 100;">
+        <a href="{{ app.request.baseUrl }}/start" id="start">
+            <img height="200" width="200" src="./img/start.png">
+        </a>
     </div>
+
     <ul class="seq-canvas">
-
-
         <li class="seq-step1 seq-valign seq-in">
             <div class="seq-vcenter">
                 <img data-seq class="seq-feature" src="./img/dificulity_star.png"
@@ -54,22 +56,22 @@
 
         <ul role="navigation" aria-label="Pagination" class="seq-pagination">
 
-            <li class="seq-current">
+            <li class="seq-current" data-elements="1" data-total="10" data-unique="5">
                 <a href="#step1" rel="step1" title="Łatwy">
                     <img src="./img/tir.png" alt="Łatwy" width="50" height="40" />
                 </a>
             </li>
-            <li>
+            <li data-elements="2" data-total="20" data-unique="10">
                 <a href="#step2" rel="step2" title="Średni">
                     <img src="./img/car1.png" alt="Średni" width="50" height="40" />
                 </a>
             </li>
-            <li>
+            <li  data-elements="3"  data-total="20" data-unique="15">
                 <a href="#step3" rel="step3" title="Trudny">
                     <img src="./img/plane.png" alt="Trudny" width="50" height="40" />
                 </a>
             </li>
-            <li>
+            <li  data-elements="4"data-total="20" data-unique="20">
                 <a href="#step4" rel="step4" title="Bardzo Trudny">
                     <img src="./img/speed.png" alt="Bardzo Trudny" width="50" height="40" />
                 </a>
@@ -82,4 +84,29 @@
 
     </fieldset>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var interval = null;
+        $.fx.speeds._default = 220;
+        var $start = $('#start');
+        setInterval(function () {
+            $start.transition({scale: 1.2, delay: 300});
+            $start.transition({scale: 1.0, delay: 300});
+        }, 2000);
+
+        $start.on('click', function(e) {
+            e.preventDefault();
+
+            var currentTarget = e.currentTarget;
+            var $seq = $('.seq-pagination .seq-current');
+            var params = $.param({
+                number: $seq.data('elements'),
+                total: $seq.data('total'),
+                unique: $seq.data('unique')
+            })
+            window.location = currentTarget.href + '?' + params
+        })
+
+    });
+</script>
 {% endblock %}
