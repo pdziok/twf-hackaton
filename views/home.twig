@@ -6,7 +6,7 @@
 
     <div style="position:absolute;right:20px;bottom:20px; z-index: 100;">
         <a href="{{ app.request.baseUrl }}/start" id="start">
-            <img height="200" width="200" src="./img/start.png">
+            <img height="200" width="200" src="./img/start.png"/>
         </a>
     </div>
 
@@ -82,10 +82,16 @@
             <img src="./img/next.svg" alt="Next" />
         </button>
 
+        <audio class="audioDemo" controls preload="none">
+            <source src="/sounds/startClick.mp3" type="audio/mp3">
+        </audio>
+
     </fieldset>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        $(".audioDemo").trigger('load');
+
         var interval = null;
         $.fx.speeds._default = 220;
         var $start = $('#start');
@@ -97,16 +103,19 @@
         $start.on('click', function(e) {
             e.preventDefault();
 
-            var currentTarget = e.currentTarget;
-            var $seq = $('.seq-pagination .seq-current');
-            var params = $.param({
-                number: $seq.data('elements'),
-                total: $seq.data('total'),
-                unique: $seq.data('unique')
-            })
-            window.location = currentTarget.href + '?' + params
+            $(".audioDemo").trigger('play').on('ended', function() {
+                var currentTarget = e.currentTarget;
+                var $seq = $('.seq-pagination .seq-current');
+                var params = $.param({
+                    number: $seq.data('elements'),
+                    total: $seq.data('total'),
+                    unique: $seq.data('unique')
+                });
+                window.location = currentTarget.href + '?' + params
+            });
         })
-
     });
 </script>
+    <script src="./assets/js/vendor/sequence.min.js"></script>
+    <script src="./assets/js/vendor/sequence-theme.mono.js"></script>
 {% endblock %}

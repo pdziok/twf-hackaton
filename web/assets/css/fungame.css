@@ -30,7 +30,6 @@
     bottom: 20px;
 }
 
-.seq-in .content {
-    transform: translateY(0);
-    transition: 2s;
+.audioDemo {
+    visibility: hidden;
 }
