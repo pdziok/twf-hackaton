@@ -11,3 +11,8 @@
 
 .small-vertical-post-offset-1 {
     margin-bottom: 8.33333%; }
+
+.start-button {
+    background: url('/assets/img/start.jpg') no-repeat center;
+    background-size: contain;
+}

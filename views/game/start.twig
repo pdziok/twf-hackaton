@@ -2,14 +2,21 @@
 
 {% block title %}Gra{% endblock %}
 {% block content %}
-    <div class="grid-block small-vertical-offset-1 small-vertical-post-offset-1 {% if cards|length > 5 %}small-up-{{ cards|length|round / 2 }}{% endif %}">
-        {% for item in cards %}
+    <div class="grid-block vertical">
+        <div class="grid-block small-vertical-offset-1 {% if cards|length > 5 %}small-up-{{ cards|length|round / 2 }}{% endif %}">
+            {% for item in cards %}
+                <div class="grid-block">
+                    <div class="grid-content card"
+                         style="background-image: url('/{{ item.href }}'); background-size: contain;">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
         <div class="grid-block">
-            <div class="grid-content card"
-                 style="background-image: url('/{{ item.href }}'); background-size: contain;">
+            <div class="grid-content start-button">
+
             </div>
         </div>
-        {% endfor %}
     </div>
 {% endblock %}
 
