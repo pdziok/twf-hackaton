@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function () {
     $(".game-card").flip({
         trigger: 'manual'
     });
@@ -12,8 +12,10 @@ $(function () {
 
         if (!isProcessed()) {
             if ($isOk) {
+                console.log('ok');
                 flipOk();
             } else {
+                console.log('wrong');
                 flipWrong();
             }
         }

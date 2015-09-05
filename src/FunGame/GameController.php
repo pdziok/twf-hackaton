@@ -34,9 +34,14 @@ class GameController
         ]);
     }
 
-    public function getMainAction(SilexApplication $app)
+    public function getMainAction(Request $request, SilexApplication $app)
     {
-        return $app['twig']->render('game/main.twig');
+        $amount = $request->get('amount', 3);
+        $cards = $this->getRandomCards($amount);
+
+        return $app['twig']->render('game/main.twig', [
+            'cards' => $cards
+        ]);
     }
 
     public function getSummaryAction(SilexApplication $app)

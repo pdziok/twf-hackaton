@@ -1,8 +1,15 @@
+.game-card-container{
+    padding: 10px;
+}
+.game-card {
+    padding: 0px;
+    overflow: hidden;
+}
 .card {
     background-size: contain;
     background: no-repeat center #fff;
-    margin: 0.5em;
-    padding: 1.5em;
+    margin: 10px;
+    padding: 0;
     box-shadow: 0.1em 0.1em 0.5em #000;
 }
 
