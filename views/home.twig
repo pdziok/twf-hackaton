@@ -3,6 +3,83 @@
 {% block title %}Index{% endblock %}
 {% block content %}
 <div class="grid-content">
-    Content of the page...
+    <div id="timer" style="position:absolute;right:20px;bottom:20px">
+        <img height="200" width="200" src="./img/start.png" />
+    </div>
+    <ul class="seq-canvas">
+
+
+        <li class="seq-step1 seq-valign seq-in">
+            <div class="seq-vcenter">
+                <img data-seq class="seq-feature" src="./img/dificulity_star.png"
+                     alt="A cartoon illustration of a bunch of bananas" width="389" height="300"
+                     srcset="./img/tir.png 1x" />
+                <h2 data-seq class="seq-title">Szybki</h2>
+            </div>
+        </li>
+
+        <li class="seq-step2 seq-valign">
+            <div class="seq-vcenter">
+                <img data-seq class="seq-feature" src="./img/dificulity_star.png"
+                     alt="A cartoon illustration of half a coconut" width="200	" height="200"
+                     srcset="./img/car1.png" />
+                <h2 data-seq class="seq-title">Prez</h2>
+            </div>
+        </li>
+
+        <li class="seq-step3 seq-valign">
+            <div class="seq-vcenter">
+                <img data-seq class="seq-feature"
+                     src="./img/plane.png" alt="Poziom trudny"
+                     width="350" height="300" srcset="./img/plane.png 1x" />
+                <h2 data-seq class="seq-title">Szybki</h2>
+            </div>
+        </li>
+
+        <li class="seq-step4 seq-valign">
+            <div class="seq-vcenter">
+                <img data-seq class="seq-feature"
+                     src="./img/difficulity_car.png" alt="Poziom trudny"
+                     width="350" height="300" srcset="./img/speed.png 1x" />
+                <h2 data-seq class="seq-title">Szybki</h2>
+            </div>
+        </li>
+    </ul>
+
+    <fieldset class="seq-nav" aria-label="Slider buttons" aria-controls="sequence">
+
+        <button type="button" class="seq-prev" aria-label="Previous">
+            <img src="./img/prev.svg" alt="Previous" />
+        </button>
+
+        <ul role="navigation" aria-label="Pagination" class="seq-pagination">
+
+            <li class="seq-current">
+                <a href="#step1" rel="step1" title="Łatwy">
+                    <img src="./img/tir.png" alt="Łatwy" width="50" height="40" />
+                </a>
+            </li>
+            <li>
+                <a href="#step2" rel="step2" title="Średni">
+                    <img src="./img/car1.png" alt="Średni" width="50" height="40" />
+                </a>
+            </li>
+            <li>
+                <a href="#step3" rel="step3" title="Trudny">
+                    <img src="./img/plane.png" alt="Trudny" width="50" height="40" />
+                </a>
+            </li>
+            <li>
+                <a href="#step4" rel="step4" title="Bardzo Trudny">
+                    <img src="./img/speed.png" alt="Bardzo Trudny" width="50" height="40" />
+                </a>
+            </li>
+        </ul>
+
+        <button type="button" class="seq-next" aria-label="Next">
+            <img src="./img/next.svg" alt="Next" />
+        </button>
+
+    </fieldset>
 </div>
 {% endblock %}
