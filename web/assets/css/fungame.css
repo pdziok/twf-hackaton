@@ -10,6 +10,10 @@
     box-shadow: 0.1em 0.1em 0.5em #000;
 }
 
+.game-card-container {
+    overflow-y: hidden !important;
+}
+
 .small-vertical-offset-1 {
     margin-top: 8.33333%; }
 
