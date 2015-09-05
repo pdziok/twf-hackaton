@@ -3,6 +3,10 @@ $(document).ready(function () {
         trigger: 'manual'
     });
 
+    var card = $(".game-card .card");
+    card.css('width', parseInt(new String(card.css('width')).replace(/[^0-9]/, '')) - 20);
+    card.css('height', parseInt(new String(card.css('height')).replace(/[^0-9]/, '')) - 20);
+
     $('.game-card-container').click(function () {
         var $card = $(this).find('.game-card');
         var $state = $card.data('state');
