@@ -57,4 +57,16 @@ $(document).ready(function () {
             $card.find('.back img').attr('src', $img);
         }
     });
+    function recalculateElementWidth() {
+        var $cards = $('.cards-container');
+        var cardAmount = $cards.find('.game-card').length;
+        var ratio = $('body').width() / $('body').height();
+        //var cardsPerRow = Math.sqrt(cardAmount) * ratio;
+        var desiredNumberPerRow = Math.ceil(cardAmount / (3 * ratio));
+        var cardsPerRow = cardAmount / desiredNumberPerRow;
+        $cards.removeClass('small-up-1 small-up-2 small-up-3 small-up-4 small-up-5 small-up-6 small-up-7 small-up-8 small-up-9  small-up-10')
+        $cards.addClass('small-up-' + Math.round(cardsPerRow))
+    }
+    recalculateElementWidth();
+    $(window).resize(recalculateElementWidth);
 });
