@@ -75,4 +75,24 @@ $(document).ready(function () {
         recalculateElementWidth();
         relalculateCardDims();
     });
+
+    var shake = function (e) {
+        var $e = $(e);
+        if (Math.random() > 0.8) {
+            $e.transition({ rotate: '10deg', scale: 1.1 });
+            $e.transition({ rotate: '-10deg', scale: 1.1 });
+            $e.transition({ rotate: '0deg', scale: 1.0 });
+        }
+
+        setTimeout(function() {
+            shake(e);
+        }, Math.random() * 10000);
+    };
+
+    $('.game-card').each(function() {
+        var that = this;
+        setTimeout(function() {
+            shake(that);
+        }, Math.random() * 10000);
+    });
 });
