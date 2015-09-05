@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class GameController
 {
+    const CHOICE_CARDS = 3;
+    const TOTAL_CARDS = 20;
+    const UNIQUE_CARDS = 6;
+
     private $imageList = [
         ['id' => 1, 'href' => 'cards/1.jpg'],
         ['id' => 2, 'href' => 'cards/2.jpg'],
@@ -34,8 +38,8 @@ class GameController
 
     public function getStartAction(Request $request, SilexApplication $app)
     {
-        $amount = $request->get('number', 3);
-        $cards = $this->getRandomCards($amount);
+        $number = $request->get('number', self::CHOICE_CARDS);
+        $cards = $this->getRandomCards($number);
         $chosen = [];
         foreach ($cards as $card) {
             $chosen[] = $card['id'];
@@ -43,6 +47,7 @@ class GameController
 
         return $app['twig']->render('game/start.twig', array_merge([
             'cards' => $cards,
+            'number' => $number,
             'chosen' => $chosen
         ], $request->query->all()));
     }
@@ -50,10 +55,8 @@ class GameController
     public function getPlayAction(Request $request, SilexApplication $app)
     {
         $chosenIds = $request->get('chosen');
-
-        $allCardsNumber = $request->get('total', 20);
-        $cardTypesNumber = $request->get('unique', 6);
-//        $chosenIds = $request->get('chosenIds');
+        $allCardsNumber = $request->get('total', self::TOTAL_CARDS);
+        $cardTypesNumber = $request->get('unique', self::UNIQUE_CARDS);
 
         $cardIds = $this->getCardIdsToPlay($allCardsNumber, $cardTypesNumber, $chosenIds);
         $cards = $this->getCards($cardIds, $chosenIds);
@@ -70,7 +73,7 @@ class GameController
         $isFinishEarlier = $request->get('isFinishEarlier');
 
         return $app['twig']->render('game/summary.twig', [
-            'cards' => $gameTime,
+            'gameTime' => $gameTime,
             'tries' => $tries,
             'isFinishEarlier' => $isFinishEarlier,
         ]);

@@ -2,7 +2,6 @@ $(function () {
 
     var startTime = new Date();
     var tries = 0;
-    var isFinishEarlier = 0;
 
     function increaseTry() {
         tries++;
@@ -28,20 +27,23 @@ $(function () {
         return seconds;
     }
 
-    function finishGame(startTime) {
+    function finishGame(startTime, isFinishEarlier) {
+        isFinishEarlier = typeof isFinishEarlier !== 'undefined' ? isFinishEarlier : 0;
+
         var gameTime = calculateGameTime(startTime);
-        redirectToSummary(gameTime);
+        redirectToSummary(gameTime, isFinishEarlier);
     }
 
-    function redirectToSummary(gameTime) {
+    function redirectToSummary(gameTime, isFinishEarlier) {
+        isFinishEarlier = typeof isFinishEarlier !== 'undefined' ? isFinishEarlier : 0;
+
         var redirectUrl = '';
         redirectUrl += window.location.protocol + '//' + window.location.hostname + '/summary';
         redirectUrl += '?gameTime=' + gameTime;
-        redirectUrl += '?tries=' + tries;
-        redirectUrl += '?isFinishEarlier=' + isFinishEarlier;
+        redirectUrl += '&tries=' + tries;
+        redirectUrl += '&isFinishEarlier=' + isFinishEarlier;
         window.location.href = redirectUrl;
     }
-
 
     $(".game-card").flip({
         trigger: 'manual'
@@ -107,6 +109,12 @@ $(function () {
             $card.find('.back').css('background-image', 'url(' + $img + ')');
         }
     });
+
+    $('.finish-earlier').click(function () {
+        console.log(1);
+        finishGame(startTime, true);
+    });
+
     function recalculateElementWidth() {
         var $cards = $('.cards-container');
         var cardAmount = $cards.find('.game-card').length;
@@ -117,9 +125,10 @@ $(function () {
         $cards.removeClass('small-up-1 small-up-2 small-up-3 small-up-4 small-up-5 small-up-6 small-up-7 small-up-8 small-up-9  small-up-10')
         $cards.addClass('small-up-' + Math.round(cardsPerRow))
     }
+
     recalculateElementWidth();
     relalculateCardDims();
-    $(window).resize(function() {
+    $(window).resize(function () {
         recalculateElementWidth();
         relalculateCardDims();
     });
@@ -139,9 +148,9 @@ $(function () {
         }
     };
 
-    $('.game-card').each(function() {
+    $('.game-card').each(function () {
         var that = this;
-        setTimeout(function() {
+        setTimeout(function () {
             shake(that);
         }, Math.random() * 10000);
     });

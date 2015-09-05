@@ -5,7 +5,6 @@
     <div class="grid-block vertical">
 
         <div class="grid-block cards-container {% if cards|length > 5 %}small-up-{{ (cards|length / 3)|round }}{% endif %}">
-
             {% for i,card in cards %}
                 <div class="grid-block game-card-container">
                     <div id="game-card{{ i }}" class="grid-content game-card" data-is-ok="{{ card.chosen }}"
@@ -18,6 +17,10 @@
                 </div>
             {% endfor %}
         </div>
+        <div style="text-align: right; padding: 0 20px 15px 0;">
+            <a class="finish-earlier"><img height="100" width="100" src="./img/end.png"></a>
+        </div>
     </div>
+
 {% endblock %}
 
