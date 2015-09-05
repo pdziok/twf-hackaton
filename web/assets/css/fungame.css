@@ -21,6 +21,15 @@
     background-size: contain;
 }
 
+.start-button-small {
+    background: url('/assets/img/start.png') no-repeat center;
+    background-size: contain;
+    width: 200px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
 .seq-in .content {
     transform: translateY(0);
     transition: 2s;
