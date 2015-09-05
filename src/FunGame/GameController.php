@@ -5,25 +5,40 @@
 namespace FunGame;
 
 use Silex\Application as SilexApplication;
+use Symfony\Component\HttpFoundation\Request;
 
 class GameController
 {
-    public function getStartAction(SilexApplication $app)
+    private $imageList = [
+        ['id' => 1, 'href' =>'cards/1.jpg'],
+        ['id' => 2, 'href' =>'cards/2.jpg'],
+        ['id' => 3, 'href' =>'cards/3.jpg'],
+        ['id' => 4, 'href' =>'cards/4.jpg'],
+        ['id' => 5, 'href' =>'cards/5.jpg'],
+        ['id' => 6, 'href' =>'cards/6.jpg'],
+        ['id' => 7, 'href' =>'cards/7.jpg'],
+        ['id' => 8, 'href' =>'cards/8.jpg'],
+        ['id' => 9, 'href' =>'cards/9.jpg'],
+        ['id' => 10, 'href' =>'cards/10.jpg'],
+        ['id' => 11, 'href' =>'cards/11.jpg'],
+        ['id' => 12, 'href' =>'cards/12.jpg'],
+    ];
+
+    public function getStartAction(Request $request, SilexApplication $app)
     {
+        $amount = $request->get('amount', 3);
+
+        $stack = $this->imageList;
+
+        $cards = [];
+        for ($i = 0; $i < $amount; $i++) {
+            $randomElement = rand(0, count($stack) - 1);
+            $cards[] = array_splice($stack, $randomElement, 1)[0];
+            $stack = array_values($stack);
+        }
+
         return $app['twig']->render('game/start.twig', [
-            'cards' => [
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-                ['href' => 'http://ocdn.eu/images/pulscms/OTY7MDQsMCwxNywzMjAsMWMyOzA2LDMxNCwxYmM7MGMsMTQwYjFjZmU3ZjBhYzUyZWRjMDEwZDcwOTc4ZTg0YmUsMSwxLDYsMA__/1ab5be982c5d11f9091e92b759cd801e.jpg'],
-            ]
+            'cards' => $cards
         ]);
     }
 
