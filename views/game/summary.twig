@@ -2,5 +2,75 @@
 
 {% block title %}Koniec{% endblock %}
 {% block content %}
+    <div id="starContainer" style="width:100%;text-align:center">
+        <img src="./img/dificulity_star.png" class="star" style="opacity:0">
+        <img src="./img/dificulity_star.png" class="star" style="opacity:0">
+        <img src="./img/dificulity_star.png" class="star" style="opacity:0">
+    </div>
+
+    <div id="score"
+         style="position:absolute;left:40px;bottom:40px;color:gold;font-weight:bold;font-size:large;font-family:'Comic Sans MS';opacity:0">
+        <label>Próby: {{ tries }}</label>
+        <label>Czas: {{ gameTime }} sekund</label>
+        <label>Zakończono przyciskiem: {% if(isFinishEarlier) %}tak{% else %}nie{% endif %}</label>
+    </div>
+
+    <div id="end" style="position:absolute;right:50px;bottom:30px;width:200px;height:200px;z-index:99">
+        <a href="/">
+            <img height="150" width="150" src="./img/end.png"/>
+        </a>
+    </div>
+
+    <script type="text/javascript">
+        $(".audioDemo").trigger('load');
+
+        $(document).ready(function () {
+            var test = 300;
+            $('.star').each(function () {
+                test += 300;
+                $(this).transition({opacity: '1', scale: 1.0, delay: test});
+            });
+
+            $('#score').transition({opacity: '1', scale: 1.0, delay: 2000});
+
+            interval = setInterval(function () {
+                $('#start').transition({scale: 1.2, delay: 300});
+                $('#start').transition({scale: 1.0, delay: 300});
+            }, 2000);
+
+
+            setInterval(function () {
+                var delayInc = 0;
+                $('.star').each(function () {
+                    delayInc += 900;
+                    $(this).transition({rotate: '10deg', scale: 1.1, delay: delayInc});
+                    $(this).transition({rotate: '-10deg', scale: 1.1,});
+                    $(this).transition({rotate: '0deg', scale: 1.0});
+
+                })
+            }, 9000);
+
+
+            interval = setInterval(function () {
+                $('#end').transition({scale: 1.2, delay: 300});
+                $('#end').transition({scale: 1.0, delay: 300});
+            }, 2000);
+
+            $('#start').click(function () {
+                $(".audioDemo").trigger('play');
+            });
+
+
+            //setInterval(function () {
+            //    $('.x').each(function(){
+            //        if (Math.random() > 0.8) {
+            //            $(this).transition({ rotate: '10deg', scale: 1.1 });
+            //            $(this).transition({ rotate: '-10deg', scale: 1.1 });
+            //            $(this).transition({ rotate: '0deg', scale: 1.0 });
+            //        }
+            //    })
+            //}, 2000);
+        });
+    </script>
 {% endblock %}
 
