@@ -4,7 +4,7 @@
 {% block content %}
     <div class="grid-block vertical">
 
-        <div class="grid-block small-vertical-offset-1 {% if cards|length > 5 %}small-up-{{ (cards|length / 3)|round }}{% endif %}">
+        <div class="grid-block cards-container {% if cards|length > 5 %}small-up-{{ (cards|length / 3)|round }}{% endif %}">
 
             {% for i,card in cards %}
             <div class="grid-block game-card-container">
