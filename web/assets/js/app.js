@@ -10,13 +10,12 @@ $(document).ready(function () {
     $('.game-card-container').click(function () {
         var $card = $(this).find('.game-card');
         var $state = $card.data('state');
-        var $isOk = $card.data('is-ok');
+        var $isOk = parseInt($card.data('is-ok'));
         var $imgOk = './img/ok.jpg';
         var $imgWrong = './img/wrong.jpg';
 
         if (!isProcessed()) {
             if ($isOk) {
-                console.log('ok');
                 flipOk();
             } else {
                 console.log('wrong');
@@ -54,7 +53,7 @@ $(document).ready(function () {
         }
 
         function setBackImage($img) {
-            $card.find('.back img').attr('src', $img);
+            $card.find('.back').css('background-image', 'url(' + $img + ')');
         }
     });
     function recalculateElementWidth() {

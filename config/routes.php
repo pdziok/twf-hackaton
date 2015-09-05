@@ -16,8 +16,8 @@ return [
             ],
         ],
         [
-            'pattern' => '/game',
-            'controller' => 'game.controller:getMainAction',
+            'pattern' => '/play',
+            'controller' => 'game.controller:getPlayAction',
             'method' => [
                 'get'
             ],
