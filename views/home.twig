@@ -103,7 +103,9 @@
         $start.on('click', function(e) {
             e.preventDefault();
 
-            $(".audioDemo").trigger('play').on('ended', function() {
+            $(".audioDemo").trigger('play');
+
+            setTimeout(function() {
                 var currentTarget = e.currentTarget;
                 var $seq = $('.seq-pagination .seq-current');
                 var params = $.param({
@@ -112,10 +114,12 @@
                     unique: $seq.data('unique')
                 });
                 window.location = currentTarget.href + '?' + params
-            });
+            }, 300);
         })
     });
 </script>
+    <script src="./assets/js/vendor/imagesloaded.pkgd.min.js"></script>
+    <script src="./assets/js/vendor/hammer.min.js"></script>
     <script src="./assets/js/vendor/sequence.min.js"></script>
     <script src="./assets/js/vendor/sequence-theme.mono.js"></script>
 {% endblock %}
