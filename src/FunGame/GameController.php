@@ -27,15 +27,7 @@ class GameController
     public function getStartAction(Request $request, SilexApplication $app)
     {
         $amount = $request->get('amount', 3);
-
-        $stack = $this->imageList;
-
-        $cards = [];
-        for ($i = 0; $i < $amount; $i++) {
-            $randomElement = rand(0, count($stack) - 1);
-            $cards[] = array_splice($stack, $randomElement, 1)[0];
-            $stack = array_values($stack);
-        }
+        $cards = $this->getRandomCards($amount);
 
         return $app['twig']->render('game/start.twig', [
             'cards' => $cards
@@ -50,5 +42,23 @@ class GameController
     public function getSummaryAction(SilexApplication $app)
     {
         return $app['twig']->render('game/summary.twig');
+    }
+
+    /**
+     * @param $amount
+     * @return array
+     */
+    private function getRandomCards($amount)
+    {
+        $stack = $this->imageList;
+
+        $cards = [];
+        for ($i = 0; $i < $amount; $i++) {
+            $randomElement = rand(0, count($stack) - 1);
+            $cards[] = array_splice($stack, $randomElement, 1)[0];
+            $stack = array_values($stack);
+        }
+
+        return $cards;
     }
 }
