@@ -127,7 +127,7 @@ $(function () {
     var shake = function (e) {
         var $e = $(e);
         if ($e.attr('data-is-guessed') == 0) {
-            if (Math.random() > 0.0) {
+            if (Math.random() > 0.8) {
                 $e.transition({rotate: '10deg', scale: 1.1});
                 $e.transition({rotate: '-10deg', scale: 1.1});
                 $e.transition({rotate: '0deg', scale: 1.0});
